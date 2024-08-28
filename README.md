@@ -3,7 +3,7 @@
 [![Paypal](http://img.shields.io/badge/donate-paypal-1d3fe5)](https://www.paypal.me/jaliborc)
 [![Discord](http://img.shields.io/badge/discuss-discord-5865F2)](https://bit.ly/discord-jaliborc)
 
-A library that helps users keep your addons up to date. It handles both detecting when a new version of your addon is available and letting users know of it in an unintrusive way.
+A library that helps users keep your addons up to date. It handles both detecting when a new version of your addon is available and letting users know of it in an unobtrusive way.
 
 ### Usage
 You can simply call the library to check for updates (after saved variables have been loaded):
