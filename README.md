@@ -1,8 +1,9 @@
-# StaleCheck-1.0 :date:
+![](http://jaliborc.com/media/addons/large/stalecheck.webp)
 [![Patreon](http://img.shields.io/badge/news%20&%20rewards-patreon-ff4d42)](https://www.patreon.com/jaliborc)
 [![Paypal](http://img.shields.io/badge/donate-paypal-1d3fe5)](https://www.paypal.me/jaliborc)
 [![Discord](http://img.shields.io/badge/discuss-discord-5865F2)](https://bit.ly/discord-jaliborc)
 
+# StaleCheck-1.0 :date:
 A library that helps users keep your addons up to date. It handles both detecting when a new version of your addon is available and letting users know of it in an unobtrusive way.
 
 ### Usage
