@@ -20,8 +20,10 @@ MyAddon:Embed(Lib)
 MyAddon:CheckForUpdates("MyAddon", My_Saved_Vars, "Interface/Addons/MyAddon/myIcon")
 ```
 
-### Popups
-Creating popups through the blizzard API causes taint. Thus, the library will only show a popup message if `Sushi-3.1` is loaded. Otherwise, a chat message will be printed instead.
+### Notes
+- Version numbers must be in `x[.x][.x]` format.  For example: `'5'`, `'5.0'` and `'5.0.0'` are all valid version numbers.
+- Add `'b'` or `'a'` to either end of the version number to mark it as beta/alpha version (example: `'5.0b'` will be interpreted as beta build).
+- Creating popups through the blizzard API causes taint. Thus, the library will only show a popup message if `Sushi-3.1` is loaded. Otherwise, a chat message will be printed instead.
 
 ### Reminder!
 If you use this library, please list it as one of your dependencies in the CurseForge admin system. It's a big help! :+1:

@@ -15,7 +15,7 @@ GNU General Public License for more details.
 This file is part of StaleCheck.
 ]]--
 
-local Lib = LibStub:NewLibrary('StaleCheck-1.0', 1)
+local Lib = LibStub:NewLibrary('StaleCheck-1.0', 2)
 if not Lib then
 	return
 elseif not Lib.registry then
@@ -98,7 +98,7 @@ function Lib:CheckForUpdates(addon, sets, icon)
 			sets.latest = {cooldown = GetServerTime() + 7 * 24 * 60 * 60}
 		end
 
-		Lib.registry[addon] = {sets = sets, queue = {}, installed = installed}
+		Lib.registry[addon] = {sets = sets, queue = {}, installed = installed, istest = installed:find('^[ab]') or installed:find('[ab]$')}
 		sets.latest = sets.latest or {}
     end
 end
@@ -150,8 +150,10 @@ end
 
 function Lib:Broadcast()
 	for addon, handler in pairs(Lib.registry) do
-		for channel in pairs(handler.queue) do
-			C_ChatInfo.SendAddonMessage('Stale-1.0', strjoin('|', addon, handler.installed), channel)
+		if not handler.istest then
+			for channel in pairs(handler.queue) do
+				C_ChatInfo.SendAddonMessage('Stale-1.0', strjoin('|', addon, handler.installed), channel)
+			end
 		end
 
 		wipe(handler.queue)
