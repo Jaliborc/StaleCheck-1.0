@@ -22,7 +22,7 @@ MyAddon:CheckForUpdates("MyAddon", My_Saved_Vars, "Interface/Addons/MyAddon/myIc
 
 ### Notes
 - Version numbers must be in `x[.x][.x]` format.  For example: `'5'`, `'5.0'` and `'5.0.0'` are all valid version numbers.
-- Add `'b'` or `'a'` to either end of the version number to mark it as beta/alpha version (example: `'5.0b'` will be interpreted as beta build).
+- Add `'b'` or `'a'` somewhere to version number to mark it as beta/alpha version (example: `'5.0b'` and `'5.0 beta'` will both be interpreted as beta builds).
 - Creating popups through the blizzard API causes taint. Thus, the library will only show a popup message if `Sushi-3.1` is loaded. Otherwise, a chat message will be printed instead.
 
 ### Reminder!

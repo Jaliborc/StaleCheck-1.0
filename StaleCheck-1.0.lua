@@ -98,7 +98,7 @@ function Lib:CheckForUpdates(addon, sets, icon)
 			sets.latest = {cooldown = GetServerTime() + 7 * 24 * 60 * 60}
 		end
 
-		Lib.registry[addon] = {sets = sets, queue = {}, installed = installed, istest = installed:find('^[ab]') or installed:find('[ab]$')}
+		Lib.registry[addon] = {sets = sets, queue = {}, installed = installed, istest = installed:find('[ab]')}
 		sets.latest = sets.latest or {}
     end
 end
