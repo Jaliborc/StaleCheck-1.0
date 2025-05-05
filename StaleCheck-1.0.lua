@@ -34,11 +34,11 @@ end
 
 local function popup(text, addon, icon, who, version)
     print(format('|cffff0000' .. text:gsub('|c%x%x%x%x%x%x%x%x', '|cffffffff'):gsub('|n', ' ') .. '|r', addon, who, version))
-    xpcall(function()
+    pcall(function()
         LibStub('Sushi-3.2').Popup {
 			text = format(text, addon, who, version), button1 = OKAY,
 			icon = icon or C_AddOns.GetAddOnMetadata(addon, 'icontexture') }
-    end, nop)
+    end)
 end
 
 
