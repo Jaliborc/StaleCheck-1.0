@@ -3,5 +3,7 @@
 ## Interface: 120001, 120000, 50501, 40402, 30404, 20505, 11507
 ## Author: Jaliborc (João Cardoso)
 ## Category: Libraries
+## Dependencies: LibStub
+## OptionalDeps: Sushi-3.2
 
 StaleCheck-1.0.lua
