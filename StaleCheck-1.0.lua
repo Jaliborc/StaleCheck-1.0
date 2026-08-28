@@ -81,7 +81,7 @@ elseif locale == 'itIT' then
     invalidBuild = 'La tua copia di |cffffd200%s|r è corrotta o illegale.|nPer favore scarica una versione ufficiale gratuitamente.'
 elseif locale == 'ptBR' or locale == 'ptPT' then
     outOfDate = 'A sua versão do |cffffd200%s|r pode estar desatualizada!|n%s relatou estar a usar|n|cff82c5ff%s|r, por favor, atualize se for verdade.'
-    invalidBuild = 'Sua cópia de |cffffd200%s|r está corrompida ou é ilegal.|Faça download de uma versão oficial gratuitamente.'
+    invalidBuild = 'Sua cópia de |cffffd200%s|r está corrompida ou é ilegal.|nFaça download de uma versão oficial gratuitamente.'
 end
 
 
