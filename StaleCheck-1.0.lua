@@ -114,7 +114,7 @@ end
 
 --[[ Events ]]--
 
-function Lib:OnMessage(_, prefix, message, channel, sender)
+function Lib:OnMessage(prefix, message, channel, sender)
 	if prefix == 'Stale-1.0' then
 		local addon, version = strsplit('|', message)
 		local handler = Lib.registry[addon]
