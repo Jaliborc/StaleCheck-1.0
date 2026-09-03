@@ -15,27 +15,21 @@ GNU General Public License for more details.
 This file is part of StaleCheck.
 ]]--
 
-local Lib = LibStub:NewLibrary('StaleCheck-1.0', 4)
+local Lib = LibStub:NewLibrary('StaleCheck-1.0', 5)
 if not Lib then
 	return
-elseif not Lib.registry then
-	local frame = CreateFrame('Frame')
-	frame:SetScript('OnEvent', function(self, event, ...)
-		if event == 'CHAT_MSG_ADDON' then
-			Lib:OnMessage(...)
-		elseif event == 'GUILD_ROSTER_UPDATE' then
-			Lib:OnGuild()
-		elseif event == 'GROUP_ROSTER_UPDATE' then
-			Lib:OnGroup()
-		end
-	end)
-	frame:RegisterEvent('CHAT_MSG_ADDON')
-	frame:RegisterEvent('GUILD_ROSTER_UPDATE')
-	frame:RegisterEvent('GROUP_ROSTER_UPDATE')
+elseif not Lib.frame then
+	Lib.frame = CreateFrame('Frame')
+	Lib.frame:SetScript('OnEvent', function(_, event, ...) Lib[event](Lib, ...) end)
+	Lib.frame:RegisterEvent('GROUP_ROSTER_UPDATE')
+	Lib.frame:RegisterEvent('GUILD_ROSTER_UPDATE')
+	Lib.frame:RegisterEvent('CHAT_MSG_ADDON')
 
-	C_ChatInfo.RegisterAddonMessagePrefix('Stale-1.0')
-	C_Timer.NewTicker(60, function() Lib:Broadcast() end)
-	Lib.registry = {}
+	if not Lib.registry then
+		C_ChatInfo.RegisterAddonMessagePrefix('Stale-1.0')
+		C_Timer.NewTicker(60, function() Lib:Broadcast() end)
+		Lib.registry = {}
+	end
 end
 
 local function int(version)
@@ -125,7 +119,7 @@ end
 
 --[[ Events ]]--
 
-function Lib:OnMessage(prefix, message, channel, sender)
+function Lib:CHAT_MSG_ADDON(prefix, message, channel, sender)
 	if prefix == 'Stale-1.0' then
 		local addon, version = strsplit('|', message)
 		local handler = Lib.registry[addon]
@@ -142,7 +136,7 @@ function Lib:OnMessage(prefix, message, channel, sender)
 	end
 end
 
-function Lib:OnGuild()
+function Lib:GUILD_ROSTER_UPDATE()
     if IsInGuild() then
 		for _, handler in pairs(Lib.registry) do
 			handler.queue.GUILD = true
@@ -150,7 +144,7 @@ function Lib:OnGuild()
     end
 end
 
-function Lib:OnGroup()
+function Lib:GROUP_ROSTER_UPDATE()
 	local channel = 
 		IsInGroup(LE_PARTY_CATEGORY_INSTANCE) and 'INSTANCE_CHAT' or
 		IsInGroup(LE_PARTY_CATEGORY_HOME) and 'PARTY' or
