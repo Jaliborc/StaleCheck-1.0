@@ -19,10 +19,21 @@ local Lib = LibStub:NewLibrary('StaleCheck-1.0', 4)
 if not Lib then
 	return
 elseif not Lib.registry then
+	local frame = CreateFrame('Frame')
+	frame:SetScript('OnEvent', function(self, event, ...)
+		if event == 'CHAT_MSG_ADDON' then
+			Lib:OnMessage(...)
+		elseif event == 'GUILD_ROSTER_UPDATE' then
+			Lib:OnGuild()
+		elseif event == 'GROUP_ROSTER_UPDATE' then
+			Lib:OnGroup()
+		end
+	end)
+	frame:RegisterEvent('CHAT_MSG_ADDON')
+	frame:RegisterEvent('GUILD_ROSTER_UPDATE')
+	frame:RegisterEvent('GROUP_ROSTER_UPDATE')
+
 	C_ChatInfo.RegisterAddonMessagePrefix('Stale-1.0')
-	EventRegistry:RegisterFrameEventAndCallback('CHAT_MSG_ADDON', function(...) Lib:OnMessage(...) end)
-	EventRegistry:RegisterFrameEventAndCallback('GUILD_ROSTER_UPDATE', function() Lib:OnGuild() end)
-	EventRegistry:RegisterFrameEventAndCallback('GROUP_ROSTER_UPDATE', function() Lib:OnGroup() end)
 	C_Timer.NewTicker(60, function() Lib:Broadcast() end)
 	Lib.registry = {}
 end
